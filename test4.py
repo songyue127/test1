@@ -1,48 +1,44 @@
-# 两个数m,n， 其中-1000 <= m,n <= 1000，求两个数相除的结果
+# coding: utf-8
+# @Author : lryself
+# @Date : 2022/9/30 22:27
+# @Software: PyCharm
+import random
 
-def compare(a:str,b:str) -> int:
-    if a < 0 and b < 0:
-        return True
-    elif a > 0 and b > 0:
-        return True
-    return False
 
-def div(a:str,b:str): ->str
-    r = ''
-    divisor = eval(b)
+def div(a: str, b: str) -> (str, str):
+    if b == "0":
+        return "除数不能为0！", ""
+    n = len(b)
+    divisor = int(b)
+    result = ""
     while True:
-        index = len(b)
-        dividend = eval(a[:index])
-        while dividend < divisor:
-            index = index + 1
-            if index > len(a):
-                r = '0'
-            elif len(r) != 0:
-                r = a
+        for index in range(n, len(a)+1):
+            dividend = int(a[:index])
+            if dividend >= divisor:
+                break
+        else:
+            if result != "":
+                return result, a.lstrip("0") if a != 0 else "0"
+            return "0", a.lstrip("0") if a != 0 else "0"
         quotient = dividend // divisor
         remainder = dividend % divisor
-        r = r + str(quotient)
-        if len(a) <= divisor and eval(a) < divisor:
+        result += str(quotient)
+        if index < len(a):
+            a = str(remainder) + a[index:]
+        else:
+            a = str(remainder)
+
+
+if __name__ == '__main__':
+
+    for i in range(10000):
+        d1 = random.randint(2, 10000000000000000)
+        d2 = random.randint(2, d1)
+        temp = div(str(d1), str(d2))
+        r1 = int(temp[0])
+        r2 = int(temp[1])
+        if d1 // d2 != r1 and d1 % d2 != r2:
+            print(f"你做错了! {d1},{d2} {r1}, {r2}")
             break
-    return r,remainder
-
-
-
-
-
-
-
-
-# if __name__ == '__main__':
-#
-#     for i in range(10000):
-#         d1 = random.randint(2, 10000000000000000)
-#         d2 = random.randint(2, d1)
-#         temp = div(str(d1), str(d2))
-#         r1 = int(temp[0])
-#         r2 = int(temp[1])
-#         if d1 // d2 != r1 and d1 % d2 != r2:
-#             print(f"你做错了! {d1},{d2} {r1}, {r2}")
-#             break
-#     else:
-#         print("你做对了！")
+    else:
+        print("你做对了！")

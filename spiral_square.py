@@ -41,7 +41,7 @@ def calSprialSquare(n: int) -> List[List[int]]:
             a = graph[j][left]
             a = a+1
         left = left-1
-        right = right+1
+        right = right-1
         up = up-1
         down = down+1
         break

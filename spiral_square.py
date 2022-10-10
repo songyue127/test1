@@ -5,7 +5,7 @@
 """
 题目：
 输入：一个数n
-输出一个螺旋正方形
+输出一个螺旋正方形(内旋)
 
 n=3
 1 2 3
@@ -26,25 +26,24 @@ def calSprialSquare(n: int) -> List[List[int]]:
     graph = [[0 for _ in range(n)] for _ in range(n)]
     # todo 赋值逻辑
     a = 1
-    left,right,up,down = 0,n-1,0,n-1
-    while left<right and up<down:
-        for i in range(left,right):
-            a = graph[up][i]
-            a = a+1
-        for j in range(up,down):
-            a = graph[j][right]
-            a = a+1
-        for i in range(right,left-1):
-            a = graph[down][i]
-            a = a+1
-        for j in range(down,up-1):
-            a = graph[j][left]
-            a = a+1
-        left = left-1
-        right = right-1
-        up = up-1
-        down = down+1
-        break
+    left, right, up, down = 0, n - 1, 0, n - 1
+    while left <= right and up <= down:
+        for i in range(left, right + 1):
+            graph[up][i] = a
+            a = a + 1
+        for j in range(up + 1, down + 1):
+            graph[j][right] = a
+            a = a + 1
+        for i in range(right - 1, left - 1, -1):
+            graph[down][i] = a
+            a = a + 1
+        for j in range(down - 1, up, -1):
+            graph[j][left] = a
+            a = a + 1
+        left = left + 1
+        right = right - 1
+        up = up + 1
+        down = down - 1
 
     return graph
 

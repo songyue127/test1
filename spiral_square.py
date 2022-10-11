@@ -48,11 +48,41 @@ def calSprialSquare(n: int) -> List[List[int]]:
     return graph
 
 
+def calSprialSquare1(n: int) -> List[List[int]]:
+    graph = [[0 for _ in range(n)] for _ in range(n)]
+    # todo 赋值逻辑
+    level = 1
+    direction = 0  # 0-右， 1-下， 2-左，3-上
+    row = 0
+    col = 0
+    for a in range(n + 1):
+        graph[row][col] = a
+        if row == level - 1 and col == n - level:
+            direction = 1
+        elif row == n - level and col == n - level:
+            direction = 2
+        elif row == n - level and col == level - 1:
+            direction = 3
+        elif row == level and col == level - 1:
+            direction = 0
+            level += 1
+
+        if direction == 0:
+            col += 1
+        elif direction == 1:
+            row += 1
+        elif direction == 2:
+            col -= 1
+        else:
+            row -= 1
+
+    return graph
+
+
 if __name__ == '__main__':
-    n = 3
+    n = 4
     g = calSprialSquare(n)
     for i in range(n):
         for j in range(n):
             print(g[i][j], end=" ")
         print()
-

@@ -23,41 +23,41 @@ import math
 
 
 def calSprialSquare(n: int) -> List[List[int]]:
-    graph = [[0 for _ in range(n)] for _ in range(n)]
+    graph = [[0 for _ in range(n // 2 * 2 + 1)] for _ in range(n // 2 * 2 + 1)]
     # todo 赋值逻辑
-    level = 1
-    direction = 0  # 0-右，1-左，2-下，，3-上
-    row = (n-1)//2
-    col = (n-1)//2
-    # for a in range(1,n * n+1):
+    level = 0
+    direction = 0  # 0-右，1-左，2-下，3-上
+    base = n // 2
+    row = base
+    col = base
     for a in range(n * n):
-        graph[row][col] = a + 1
-        if row == level and col == n - level:
-            direction = 2
-        elif row == n - level and col == n - level:
-            direction = 1
-        elif row == n - level and col == level-1:
-            direction = 3
-        elif row ==level-1  and col == level-1:
-            direction = 3
-        elif row== level-1 and col == n - level:
-            col += 1
+        graph[row][col] = a
+        graph[row][col] += 1
+        if row == base - level and col == base + level:
             level += 1
+        elif row == base - level + 1 and col == base + level:
+            direction = 2
+        elif row == base + level and col == base + level:
+            direction = 1
+        elif row == base + level and col == base - level:
+            direction = 3
+        elif row == base - level and col == base - level:
+            direction = 0
 
         if direction == 0:
             col += 1
         elif direction == 2:
             row += 1
         elif direction == 1:
-            col += 1
+            col -= 1
         elif direction == 3:
-            row += 1
+            row -= 1
 
     return graph
 
 
 if __name__ == '__main__':
-    n = 3
+    n = 7
     g = calSprialSquare(n)
     for i in range(n):
         for j in range(n):

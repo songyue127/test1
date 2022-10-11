@@ -19,17 +19,45 @@ n=4
 16 15 14 13
 """
 from typing import List
+import math
 
 
 def calSprialSquare(n: int) -> List[List[int]]:
     graph = [[0 for _ in range(n)] for _ in range(n)]
     # todo 赋值逻辑
+    level = 1
+    direction = 0  # 0-右，1-左，2-下，，3-上
+    row = (n-1)//2
+    col = (n-1)//2
+    # for a in range(1,n * n+1):
+    for a in range(n * n):
+        graph[row][col] = a + 1
+        if row == level and col == n - level:
+            direction = 2
+        elif row == n - level and col == n - level:
+            direction = 1
+        elif row == n - level and col == level-1:
+            direction = 3
+        elif row ==level-1  and col == level-1:
+            direction = 3
+        elif row== level-1 and col == n - level:
+            col += 1
+            level += 1
+
+        if direction == 0:
+            col += 1
+        elif direction == 2:
+            row += 1
+        elif direction == 1:
+            col += 1
+        elif direction == 3:
+            row += 1
 
     return graph
 
 
 if __name__ == '__main__':
-    n = 4
+    n = 3
     g = calSprialSquare(n)
     for i in range(n):
         for j in range(n):

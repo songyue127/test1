@@ -12,13 +12,13 @@ def div(a: str, b: str) -> (str, str):
     divisor = int(b)
     result = ""
     while True:
-        for index in range(n, len(a)+1):
+        for index in range(n, len(a)+1):  #不理解
             dividend = int(a[:index])
             if dividend >= divisor:
                 break
         else:
             if result != "":
-                return result, a.lstrip("0") if a != 0 else "0"
+                return result, a.lstrip("0") if a != 0 else "0"  #lstrip用来去除开头字符，strip去除头尾字符，rstrip用来去除结尾字符（三者都可以去除空白符）
             return "0", a.lstrip("0") if a != 0 else "0"
         quotient = dividend // divisor
         remainder = dividend % divisor

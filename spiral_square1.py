@@ -23,7 +23,7 @@ import math
 
 
 def calSprialSquare(n: int) -> List[List[int]]:
-    graph = [[0 for _ in range(n // 2 * 2 + 1)] for _ in range(n // 2 * 2 + 1)]
+    graph = [[0 for _ in range(n // 2 * 2 + 1)] for _ in range(n // 2 * 2 + 1)]       #2,3归一 成同一个矩阵
     # todo 赋值逻辑
     level = 0
     direction = 0  # 0-右，1-左，2-下，3-上
